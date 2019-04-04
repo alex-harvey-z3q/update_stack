@@ -16,11 +16,12 @@ edit() {
 
   for pair in "$@" ; do
     IFS='=' read -r key value <<< "$pair"
+
     jq --arg key "$key" \
-       --arg value "$value" \
-      '(.[] | select(.ParameterKey==$key)
-      | .ParameterValue) |= $value' \
-      "$PARAMS" > x ; mv x "$PARAMS"
+       --arg value "$value" '
+(.[] | select(.ParameterKey==$key) | .ParameterValue) |= $value' "$PARAMS" > x
+      
+    mv x "$PARAMS"
   done
 }
 
