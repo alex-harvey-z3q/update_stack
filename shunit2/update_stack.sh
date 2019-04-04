@@ -27,6 +27,7 @@ testIncorrectInvocation() {
 
 testIt() {
   . $script_under_test MyStack VpcId=vpc-bbb SubnetId=subnet-bbb
+
   assertEquals "unexpected parameters file generated" \
     "" "$(diff -wu shunit2/fixtures/parameters.json.after /tmp/parameters.json)"
 

@@ -12,27 +12,28 @@ based on existing values."
 }
 
 edit() {
-  local key=$1
-  local value=$2
-  jq --arg key "$key" \
-     --arg value "$value" \
-    '(.[] | select(.ParameterKey==$key)
-    | .ParameterValue) |= $value' \
-    "$PARAMS" > x ; mv x "$PARAMS"
+  local key value data
+
+  for data in "$@" ; do
+    IFS='=' read -r key value <<< "$data"
+    jq --arg key "$key" \
+       --arg value "$value" \
+      '(.[] | select(.ParameterKey==$key)
+      | .ParameterValue) |= $value' \
+      "$PARAMS" > x ; mv x "$PARAMS"
+  done
 }
 
 { [ "$1" == "-h" ] || [ -z "$2" ]; } && usage
 
 stack_name=$1 ; shift
+parameters="$@"
 
 aws cloudformation describe-stacks \
   --stack-name "$stack_name" \
   --query 'Stacks[].Parameters[]' > $PARAMS
 
-for data in "$@" ; do
-  IFS='=' read -r key value <<< "$data"
-  edit "$key" "$value" "$PARAMS"
-done
+edit $parameters
 
 aws cloudformation update-stack \
   --stack-name "$stack_name" \
