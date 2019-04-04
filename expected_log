@@ -1,0 +1,2 @@
+aws cloudformation describe-stacks --stack-name MyStack --query Stacks[].Parameters[]
+aws cloudformation update-stack --stack-name MyStack --use-previous-template --parameters file:///tmp/parameters.json

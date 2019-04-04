@@ -1,0 +1,26 @@
+[
+  {
+    "ParameterKey": "KeyPairName",
+    "ParameterValue": "myKeyPair"
+  },
+  {
+    "ParameterKey": "VpcId",
+    "ParameterValue": "vpc-aaa"
+  },
+  {
+    "ParameterKey": "SubnetId",
+    "ParameterValue": "subnet-aaa"
+  },
+  {
+    "ParameterKey": "ImageId",
+    "ParameterValue": "ami-aaa"
+  },
+  {
+    "ParameterKey": "IAMInstanceProfile",
+    "ParameterValue": "MyInstanceProfile"
+  },
+  {
+    "ParameterKey": "UserData",
+    "ParameterValue": "IyEvdXNyL2Jpbi9lbnYKCmVjaG8gaGVsbG8gd29ybGQK"
+  }
+]
