@@ -12,10 +12,10 @@ based on existing values."
 }
 
 edit() {
-  local key value data
+  local key value pair
 
-  for data in "$@" ; do
-    IFS='=' read -r key value <<< "$data"
+  for pair in "$@" ; do
+    IFS='=' read -r key value <<< "$pair"
     jq --arg key "$key" \
        --arg value "$value" \
       '(.[] | select(.ParameterKey==$key)
