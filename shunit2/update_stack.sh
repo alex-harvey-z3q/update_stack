@@ -3,7 +3,7 @@
 script_under_test=$(basename $0)
 
 tearDown() {
-  rm -f commands_log
+  rm -f commands_log expected_log
 }
 
 aws() {
